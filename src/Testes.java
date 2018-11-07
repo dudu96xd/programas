@@ -70,11 +70,6 @@ public class Testes {
         private String productID;
         private int stock;
         private double price;
-
-        @Override
-        public String toString(){
-            return productID + " - " + stock + " - " + price;
-        }
     }
 
     private static class LayoutArgument{
