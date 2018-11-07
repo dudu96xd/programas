@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -18,7 +17,6 @@ public class Testes {
 
         List<LayoutArgument> arguments = new ArrayList<>();
 
-        int saida = 0;
         int i = 1;
         while(i < args.length){
             LayoutArgument argument= new LayoutArgument();
@@ -27,35 +25,31 @@ public class Testes {
             arguments.add(argument);
         }
 
-
-
         double soma = 0;
 
         for(int k = 0; k < arguments.size(); k++){
             String produtoID = null;
-            for(int j=0;j<inputList.size() && (produtoID == null);j++){
+            int j=0;
+            while( j < inputList.size() && (produtoID == null)){
                 if(arguments.get(k).productID.equals(inputList.get(j).productID)){
                     produtoID = arguments.get(k).productID;
-
-                    soma += inputList.get(j).price;
                 }
+                j++;
             }
             if(produtoID!=null){
-
+                if((inputList.get(k).stock - arguments.get(k).qntPedido) >= 0){
+                    soma += inputList.get(k).price * arguments.get(k).qntPedido;
+                }
+                else{
+                    System.out.println(inputList.get(k).productID+" out of stock");
+                    System.exit(1);
+                }
             }
-
 
         }
 
-
-
-
-
-
-    }
-
-    private static String findProductID(){
-        arguments.get(k).productID;
+        System.out.println("Total: "+ (soma*1.23));
+        System.exit(0);
     }
 
 
